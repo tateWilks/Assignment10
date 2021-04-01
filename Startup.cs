@@ -54,6 +54,17 @@ namespace Assignment10
             app.UseEndpoints(endpoints =>
             {
                 //you'll need to map endpoints - order matters here, default should always be last
+                endpoints.MapControllerRoute("pageAndTeam",
+                    "Team{teamId}/{teamName}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("teamId",
+                    "Team{teamId}/{teamName}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("pageNum",
+                    "Page{pageNum}",
+                    new { Controller = "Home", action = "Index" });
 
                 endpoints.MapControllerRoute(
                     name: "default",

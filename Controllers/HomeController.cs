@@ -26,19 +26,22 @@ namespace Assignment10.Controllers
 
         public IActionResult Index(long? teamId, string teamName, int pageNum=1)
         {
+            int pagenum = pageNum;
+            ViewBag.SelectedTeam = teamName;
+
             //when we get a request, we'll make sure to pass in the team id, the team name, and the page number
             return View(new IndexViewModel
             {
                 //create a new view model that has the list of bowlers, the pagination, and the selected team name
                 Bowlers = _context.Bowlers
                     .FromSqlInterpolated($"SELECT * FROM Bowlers WHERE TeamId = {teamId} OR {teamId} IS NULL") //this lets us select only the bowlers that have that team id or if the team id is null then that's always true so we select everything
-                    .Skip((pageNum - 1) * NumBowlersPerPage) //you can skip values depending on the page number
+                    .Skip((pagenum - 1) * NumBowlersPerPage) //you can skip values depending on the page number
                     .Take(NumBowlersPerPage) //take only the number we want
                     .ToList(), //convert it to a list
                 Paging = new Pagination
                 {
                     BowlersPerPage = NumBowlersPerPage,
-                    CurrPage = pageNum,
+                    CurrPage = pagenum,
                     TotalBowlers = (teamId == null) ? _context.Bowlers.Count() : _context.Bowlers.Where(b => b.TeamId == teamId).Count()
                 },
                 SelectedTeam = teamName

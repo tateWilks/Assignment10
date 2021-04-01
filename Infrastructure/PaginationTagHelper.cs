@@ -24,8 +24,10 @@ namespace Assignment10.Infrastructure
             _UrlHelper = uhf;
         }
 
-        public Pagination PageInfo { get; set; }
-        [HtmlAttributeName(DictionaryAttributePrefix = "page-url")]
+        public Pagination PageInfo { get; set; }        
+
+        //dictionary to hold the strings for our urls
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")] //must be "page-url-"
         public Dictionary<string, object> KeyValuePairs { get; set; } = new Dictionary<string, object>();
 
         [HtmlAttributeNotBound]
@@ -46,7 +48,7 @@ namespace Assignment10.Infrastructure
             {
                 TagBuilder link = new TagBuilder("a");
 
-                KeyValuePairs["pagenum"] = i;
+                KeyValuePairs["pageNum"] = i;
 
                 link.Attributes["href"] = UrlHelp.Action("Index", KeyValuePairs);
                 link.InnerHtml.AppendHtml(i.ToString());

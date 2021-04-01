@@ -5,9 +5,9 @@
 @model IndexViewModel
 
 <div>
-    <h1 class="display-2 my-2">@if (System.String.IsNullOrEmpty(Model.SelectedTeam))
+    <h1 class="display-4 my-2">@if (System.String.IsNullOrEmpty(Model.SelectedTeam))
     {
-        @:Bowling League Members
+        @:Members
     }
     else
     {
@@ -43,5 +43,5 @@
 </table>
 
 <div class="justify-content-center">
-    <div page-info="@Model.Paging" page-url-team="@Model.SelectedTeam" page-class-normal="btn btn-outline-primary mx-2" page-class-selected="btn btn-primary mx-2"></div>
+    <div page-info="@Model.Paging" page-url-teamName="@Model.SelectedTeam" page-class-normal="btn btn-outline-primary mx-2" page-class-selected="btn btn-primary mx-2"></div>
 </div>
