@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IndexViewModel
+
+<div>
+    <h1 class="display-2 my-2">@if (System.String.IsNullOrEmpty(Model.SelectedTeam))
+    {
+        @:Bowling League Members
+    }
+    else
+    {
+        @Model.SelectedTeam @:Team Roster     
+    }
+    </h1>
+</div>
+
+<table class="table table-hover">
+    <thead class="">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Street Address</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Zip</th>
+            <th scope="col">Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model.Bowlers)
+        {
+            <tr>
+                <td scope="col">@b.BowlerFirstName @b.BowlerMiddleInit @b.BowlerLastName</td>
+                <td scope="col">@b.BowlerAddress</td>
+                <td scope="col">@b.BowlerCity</td>
+                <td scope="col">@b.BowlerState</td>
+                <td scope="col">@b.BowlerZip</td>
+                <td scope="col">@b.BowlerPhoneNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="justify-content-center">
+    <div page-info="@Model.Paging" page-url-team="@Model.SelectedTeam" page-class-normal="btn btn-outline-primary mx-2" page-class-selected="btn btn-primary mx-2"></div>
+</div>
